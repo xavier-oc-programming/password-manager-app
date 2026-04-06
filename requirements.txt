@@ -1,0 +1,19 @@
+# No pip install required — all modules are part of the Python standard library,
+# except pyperclip (used for reliable clipboard access on all platforms).
+#
+# Standard library modules used:
+#   tkinter   — GUI framework (ships with standard Python; on Linux: sudo apt install python3-tk)
+#   random    — password character selection
+#   json      — credential persistence
+#   pathlib   — cross-platform file paths (Python 3.4+)
+#   os        — console clearing in menu.py
+#   sys       — sys.exit and sys.path manipulation
+#   subprocess — launching builds from menu.py
+#
+# Third-party:
+#   pyperclip — clipboard copy/paste (cross-platform)
+#
+# Requires Python 3.10+ for X | Y union types and tuple[...] hints
+# used in the advanced build.
+
+pyperclip

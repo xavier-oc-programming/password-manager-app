@@ -39,17 +39,17 @@ python advanced/app.py
 
 | Feature | Original | Advanced |
 |---|---|---|
-| Generate random password | ✅ | ✅ |
-| Copy generated password to clipboard | ✅ | ✅ |
-| Save credentials to JSON | ✅ | ✅ |
-| Confirm before saving (`askokcancel`) | ✅ | ✅ |
-| Search credentials by website | ✅ | ✅ |
-| Fill entries on search hit | ✅ | ✅ |
-| Path-safe (works from any cwd) | ✅ (path-fixed copy) | ✅ |
-| OOP separation (logic / display / config) | ❌ | ✅ |
-| Zero magic numbers (`config.py`) | ❌ | ✅ |
-| Callbacks injected into Display | ❌ | ✅ |
-| `PasswordManager` pure-logic class | ❌ | ✅ |
+| Generate random password | yes | yes |
+| Copy generated password to clipboard | yes | yes |
+| Save credentials to JSON | yes | yes |
+| Confirm before saving (`askokcancel`) | yes | yes |
+| Search credentials by website | yes | yes |
+| Fill entries on search hit | yes | yes |
+| Path-safe (works from any cwd) | yes (path-fixed copy) | yes |
+| OOP separation (logic / display / config) | no | yes |
+| Zero magic numbers (`config.py`) | no | yes |
+| Callbacks injected into Display | no | yes |
+| `PasswordManager` pure-logic class | no | yes |
 
 ---
 

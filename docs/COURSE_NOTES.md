@@ -26,10 +26,6 @@ The app should:
 - **Error handling** — `FileNotFoundError`, `json.JSONDecodeError` for first-run and corrupt data
 - **`data.json` merge strategy** — load → update → write-back to preserve existing entries
 
-## Differences between `main.py` and `main2.py`
+## Course file
 
-`main2.py` (the later iteration) improves `search_password()`:
-- Also fills the **Email** and **Password** entry fields with the found credentials
-- Slightly different "not found" error message that includes the filename
-
-Everything else is identical.
+`original/main2.py` is the final iteration from the course session. It generates passwords, saves credentials to JSON, and on a successful search fills both the Email and Password entry fields with the found credentials.

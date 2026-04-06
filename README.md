@@ -29,7 +29,7 @@ pip install pyperclip
 python menu.py          # select 1 (original) or 2 (advanced)
 
 # or run builds directly:
-python original/main.py
+python original/main2.py
 python advanced/main.py
 ```
 
@@ -44,7 +44,7 @@ python advanced/main.py
 | Save credentials to JSON | ✅ | ✅ |
 | Confirm before saving (`askokcancel`) | ✅ | ✅ |
 | Search credentials by website | ✅ | ✅ |
-| Fill entries on search hit | ✅ (main2.py only) | ✅ |
+| Fill entries on search hit | ✅ | ✅ |
 | Path-safe (works from any cwd) | ✅ (path-fixed copy) | ✅ |
 | OOP separation (logic / display / config) | ❌ | ✅ |
 | Zero magic numbers (`config.py`) | ❌ | ✅ |
@@ -119,7 +119,7 @@ Every dimension, width, and generation range is a named constant. No magic numbe
 
 ```
 menu.py
-├── 1 → subprocess.run(original/main.py)
+├── 1 → subprocess.run(original/main2.py)
 │         └── [Tkinter window runs, user closes it]
 │              └── returns to menu loop
 ├── 2 → subprocess.run(advanced/main.py)
@@ -182,8 +182,7 @@ password-manager-app/
 │   └── COURSE_NOTES.md      # original exercise description and concepts covered
 │
 ├── original/
-│   ├── main.py              # course version (path-fixed); entry point for option 1
-│   ├── main2.py             # improved iteration: search also fills entries
+│   ├── main2.py             # course version (path-fixed); entry point for option 1
 │   ├── data.json            # persisted credentials (original build)
 │   └── logo.png             # lock/key image displayed in the GUI
 │
@@ -345,12 +344,12 @@ See [docs/COURSE_NOTES.md](docs/COURSE_NOTES.md) for full concept breakdown.
 
 | Module | Used in | Purpose |
 |---|---|---|
-| `tkinter` | `original/main.py`, `original/main2.py`, `advanced/display.py` | GUI framework (ships with Python; Linux: `python3-tk`) |
-| `random` | `original/main.py`, `original/main2.py`, `advanced/password_manager.py` | Password character selection and shuffling |
-| `json` | `original/main.py`, `original/main2.py`, `advanced/password_manager.py` | Credential persistence |
-| `pathlib` | `original/main.py`, `original/main2.py`, `advanced/main.py`, `advanced/display.py` | Cross-platform file paths |
+| `tkinter` | `original/main2.py`, `advanced/display.py` | GUI framework (ships with Python; Linux: `python3-tk`) |
+| `random` | `original/main2.py`, `advanced/password_manager.py` | Password character selection and shuffling |
+| `json` | `original/main2.py`, `advanced/password_manager.py` | Credential persistence |
+| `pathlib` | `original/main2.py`, `advanced/main.py`, `advanced/display.py` | Cross-platform file paths |
 | `os` | `menu.py` | Console clearing (`cls` / `clear`) |
 | `sys` | `menu.py`, `advanced/main.py`, `advanced/display.py` | `sys.exit`, `sys.path`, `sys.executable` |
 | `subprocess` | `menu.py` | Launching builds as child processes |
 | `typing` | `advanced/display.py` | `Callable` type hints |
-| `pyperclip` *(third-party)* | `original/main.py`, `original/main2.py`, `advanced/main.py` | Clipboard copy on all platforms |
+| `pyperclip` *(third-party)* | `original/main2.py`, `advanced/main.py` | Clipboard copy on all platforms |

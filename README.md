@@ -29,8 +29,8 @@ pip install pyperclip
 python menu.py          # select 1 (original) or 2 (advanced)
 
 # or run builds directly:
-python original/main2.py
-python advanced/main.py
+python original/app.py
+python advanced/app.py
 ```
 
 ---
@@ -106,7 +106,7 @@ All three fields must be non-empty before a save is attempted. A warning dialog 
 All credential logic (generate, load, save, search) lives in `advanced/password_manager.py` with no tkinter dependency. Logic can be unit-tested in isolation.
 
 **`Display` class with injected callbacks**
-`Display` owns the Tk root and every widget. It accepts `on_generate`, `on_save`, and `on_search` callables from `main.py`. No business logic lives inside `Display`.
+`Display` owns the Tk root and every widget. It accepts `on_generate`, `on_save`, and `on_search` callables from `app.py`. No business logic lives inside `Display`.
 
 **`config.py` — zero magic numbers**
 Every dimension, width, and generation range is a named constant. No magic numbers appear anywhere else in the advanced codebase.
@@ -119,10 +119,10 @@ Every dimension, width, and generation range is a named constant. No magic numbe
 
 ```
 menu.py
-├── 1 → subprocess.run(original/main2.py)
+├── 1 → subprocess.run(original/app.py)
 │         └── [Tkinter window runs, user closes it]
 │              └── returns to menu loop
-├── 2 → subprocess.run(advanced/main.py)
+├── 2 → subprocess.run(advanced/app.py)
 │         └── [Tkinter window runs, user closes it]
 │              └── returns to menu loop
 └── q → break → process exits
@@ -182,12 +182,12 @@ password-manager-app/
 │   └── COURSE_NOTES.md      # original exercise description and concepts covered
 │
 ├── original/
-│   ├── main2.py             # course version (path-fixed); entry point for option 1
+│   ├── app.py               # course version (path-fixed); entry point for option 1
 │   ├── data.json            # persisted credentials (original build)
 │   └── logo.png             # lock/key image displayed in the GUI
 │
 └── advanced/
-    ├── main.py              # orchestrator: wires PasswordManager → Display callbacks
+    ├── app.py               # orchestrator: wires PasswordManager → Display callbacks
     ├── config.py            # all constants — no magic numbers elsewhere
     ├── password_manager.py  # PasswordManager class — pure logic, no tkinter
     ├── display.py           # Display class — owns Tk root + all widgets
@@ -289,9 +289,9 @@ Keeping every widget in one class makes it trivial to swap the UI layer (e.g., r
 A single source of truth for every dimension and range. Changing `LOGO_SIZE` or `MIN_LETTERS` propagates everywhere with no hunting through code.
 
 **Callbacks injected via `__init__`**
-`Display` accepts `on_generate`, `on_save`, `on_search` at construction time. This means Display has zero knowledge of `PasswordManager` or `data.json` — it only calls back to main.py when the user acts.
+`Display` accepts `on_generate`, `on_save`, `on_search` at construction time. This means Display has zero knowledge of `PasswordManager` or `data.json` — it only calls back to `app.py` when the user acts.
 
-**`sys.path.insert` pattern in `advanced/main.py`**
+**`sys.path.insert` pattern in `advanced/app.py`**
 `sys.path.insert(0, str(Path(__file__).parent))` ensures that `import config`, `import display`, and `import password_manager` work whether the file is launched from `menu.py` via `subprocess.run(cwd=...)` or directly from the terminal.
 
 **`subprocess.run` + `cwd=` in `menu.py`**
@@ -344,12 +344,12 @@ See [docs/COURSE_NOTES.md](docs/COURSE_NOTES.md) for full concept breakdown.
 
 | Module | Used in | Purpose |
 |---|---|---|
-| `tkinter` | `original/main2.py`, `advanced/display.py` | GUI framework (ships with Python; Linux: `python3-tk`) |
-| `random` | `original/main2.py`, `advanced/password_manager.py` | Password character selection and shuffling |
-| `json` | `original/main2.py`, `advanced/password_manager.py` | Credential persistence |
-| `pathlib` | `original/main2.py`, `advanced/main.py`, `advanced/display.py` | Cross-platform file paths |
+| `tkinter` | `original/app.py`, `advanced/display.py` | GUI framework (ships with Python; Linux: `python3-tk`) |
+| `random` | `original/app.py`, `advanced/password_manager.py` | Password character selection and shuffling |
+| `json` | `original/app.py`, `advanced/password_manager.py` | Credential persistence |
+| `pathlib` | `original/app.py`, `advanced/app.py`, `advanced/display.py` | Cross-platform file paths |
 | `os` | `menu.py` | Console clearing (`cls` / `clear`) |
-| `sys` | `menu.py`, `advanced/main.py`, `advanced/display.py` | `sys.exit`, `sys.path`, `sys.executable` |
+| `sys` | `menu.py`, `advanced/app.py`, `advanced/display.py` | `sys.exit`, `sys.path`, `sys.executable` |
 | `subprocess` | `menu.py` | Launching builds as child processes |
 | `typing` | `advanced/display.py` | `Callable` type hints |
-| `pyperclip` *(third-party)* | `original/main2.py`, `advanced/main.py` | Clipboard copy on all platforms |
+| `pyperclip` *(third-party)* | `original/app.py`, `advanced/app.py` | Clipboard copy on all platforms |

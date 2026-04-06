@@ -20,10 +20,10 @@ while True:
     choice = input("Select: ").strip().lower()
 
     if choice == "1":
-        path = ROOT / "original" / "main2.py"
+        path = ROOT / "original" / "app.py"
         subprocess.run([sys.executable, str(path)], cwd=str(path.parent))
     elif choice == "2":
-        path = ROOT / "advanced" / "main.py"
+        path = ROOT / "advanced" / "app.py"
         subprocess.run([sys.executable, str(path)], cwd=str(path.parent))
     elif choice == "q":
         break
